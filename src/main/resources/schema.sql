@@ -5,7 +5,7 @@ CREATE TABLE students (
     cognom VARCHAR(100),
     age INT NOT NULL CHECK (age > 0),
     cicle VARCHAR(100) NOT NULL,
-    any INT NOT NULL CHECK (any >= 0)
+    any_estudi INT NOT NULL CHECK (any_estudi >= 0)
 );
 
 --DROP TABLE IF EXISTS customers;
