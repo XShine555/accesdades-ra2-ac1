@@ -5,21 +5,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import com.accesdades.ra2.ac1.accesdades_ra2_ac1.models.Student;
+import com.accesdades.ra2.ac1.accesdades_ra2_ac1.repository.StudentRepository;
 
 @RestController
 @RequestMapping("/api")
 public class StudentsController {
-    @GetMapping("/students")
-    public String getStudents() {
-        return "API Get Students";
+    @Autowired
+    StudentRepository studentRepository;
+
+    @GetMapping("/student")
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
     }
 
-    @PostMapping("/batch")
-    public String postStudentsBatch(@RequestBody List<Student> students) {
-        return "API Post Batch Students";
+    @PostMapping("/student/batch")
+    public String postStudentsBatch() {
+        int changes = studentRepository.save();
+        return "Number of students inserted: " + changes;
     }
 }

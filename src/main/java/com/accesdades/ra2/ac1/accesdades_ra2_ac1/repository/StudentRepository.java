@@ -22,7 +22,10 @@ public class StudentRepository {
             Student student = new Student();
             student.setId(rs.getInt("id"));
             student.setNom(rs.getString("nom"));
+            student.setCognom(rs.getString("cognom"));
             student.setAge(rs.getInt("age"));
+            student.setCicle(rs.getString("cicle"));
+            student.setAny(rs.getInt("any"));
             return student;
         }
     }
@@ -33,8 +36,10 @@ public class StudentRepository {
     }
 
     public int save() {
-        String sql = "INSERT INTO student (name, age) VALUES (?, ?)";
-        int numReg = jdbcTemplate.update(sql, "Iker", 19);
-        return numReg;
+        for (int i = 0; i < 10; i++) {
+            String sql = "INSERT INTO student (name, age) VALUES (?, ?)";
+            jdbcTemplate.update(sql, "Student-" + i, 18);
+        }
+        return 10;
     }
 }
